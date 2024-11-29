@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>File Upload</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+      .upload-form {
+        border: 2px dashed #ccc;
+        padding: 20px;
+        border-radius: 5px;
+        margin-top: 20px;
+      }
+      .messages {
+        margin: 20px 0;
+      }
+      .message {
+        padding: 10px;
+        margin: 5px 0;
+        border-radius: 4px;
+        background-color: #e3f2fd;
+      }
+      .submit-btn {
+        background-color: #4caf50;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        margin-top: 10px;
+      }
+      .submit-btn:hover {
+        background-color: #45a049;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>File Upload</h1>
+
+    {% with messages = get_flashed_messages() %} {% if messages %}
+    <div class="messages">
+      {% for message in messages %}
+      <div class="message">{{ message }}</div>
+      {% endfor %}
+    </div>
+    {% endif %} {% endwith %}
+
+    <div class="upload-form">
+      <form method="POST" enctype="multipart/form-data">
+        <p>Select files to upload:</p>
+        <input type="file" name="files[]" multiple accept=".txt,.log,.json" />
+        <br />
+        <button type="submit" class="submit-btn">Upload Files</button>
+      </form>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,670 @@
+# Time: 2024-11-21T22:08:00.448343
+# User@Host: user[user] @ localhost []
+# Query_time: 4.904587  Lock_time: 0.215590 Rows_sent: 699  Rows_examined: 30057
+SET timestamp=1732223280;
+SELECT * FROM inventory WHERE stock < threshold ORDER BY stock ASC;
+# Time: 2024-11-21T22:08:00.832423
+# User@Host: user[user] @ localhost []
+# Query_time: 1.500478  Lock_time: 0.155538 Rows_sent: 314  Rows_examined: 1570
+SET timestamp=1732223280;
+SELECT u.*, COUNT(o.id) FROM users u LEFT JOIN orders o ON u.id = o.user_id GROUP BY u.id;
+# Time: 2024-11-21T22:08:01.031603
+# User@Host: user[user] @ localhost []
+# Query_time: 3.612066  Lock_time: 0.063361 Rows_sent: 666  Rows_examined: 36630
+SET timestamp=1732223281;
+SELECT COUNT(*) FROM orders WHERE status = 'pending' GROUP BY user_id;
+# Time: 2024-11-21T22:08:01.742243
+# User@Host: user[user] @ localhost []
+# Query_time: 5.949841  Lock_time: 0.008408 Rows_sent: 467  Rows_examined: 32690
+SET timestamp=1732223281;
+SELECT * FROM users WHERE last_login > DATE_SUB(NOW(), INTERVAL 24 HOUR);
+# Time: 2024-11-21T22:08:02.090708
+# User@Host: user[user] @ localhost []
+# Query_time: 1.403045  Lock_time: 0.006960 Rows_sent: 223  Rows_examined: 223
+SET timestamp=1732223282;
+SELECT u.*, COUNT(o.id) FROM users u LEFT JOIN orders o ON u.id = o.user_id GROUP BY u.id;
+# Time: 2024-11-21T22:08:02.480885
+# User@Host: user[user] @ localhost []
+# Query_time: 3.611673  Lock_time: 0.255475 Rows_sent: 418  Rows_examined: 6688
+SET timestamp=1732223282;
+SELECT COUNT(*) FROM orders WHERE status = 'pending' GROUP BY user_id;
+# Time: 2024-11-21T22:08:02.825538
+# User@Host: user[user] @ localhost []
+# Query_time: 4.182304  Lock_time: 0.286518 Rows_sent: 757  Rows_examined: 40121
+SET timestamp=1732223282;
+SELECT COUNT(*) FROM orders WHERE status = 'pending' GROUP BY user_id;
+# Time: 2024-11-21T22:08:04.281222
+# User@Host: user[user] @ localhost []
+# Query_time: 8.151390  Lock_time: 0.346862 Rows_sent: 423  Rows_examined: 27918
+SET timestamp=1732223284;
+SELECT * FROM users WHERE last_login > DATE_SUB(NOW(), INTERVAL 24 HOUR);
+# Time: 2024-11-21T22:08:04.514450
+# User@Host: user[user] @ localhost []
+# Query_time: 9.253942  Lock_time: 0.026901 Rows_sent: 552  Rows_examined: 1656
+SET timestamp=1732223284;
+SELECT u.*, COUNT(o.id) FROM users u LEFT JOIN orders o ON u.id = o.user_id GROUP BY u.id;
+# Time: 2024-11-21T22:08:05.161842
+# User@Host: user[user] @ localhost []
+# Query_time: 2.623078  Lock_time: 0.271022 Rows_sent: 200  Rows_examined: 2000
+SET timestamp=1732223285;
+SELECT p.*, c.name FROM products p JOIN categories c ON p.category_id = c.id;
+# Time: 2024-11-21T22:08:05.619923
+# User@Host: user[user] @ localhost []
+# Query_time: 7.522635  Lock_time: 0.233724 Rows_sent: 232  Rows_examined: 5800
+SET timestamp=1732223285;
+SELECT * FROM users WHERE last_login > DATE_SUB(NOW(), INTERVAL 24 HOUR);
+# Time: 2024-11-21T22:08:05.928221
+# User@Host: user[user] @ localhost []
+# Query_time: 6.781192  Lock_time: 0.203092 Rows_sent: 258  Rows_examined: 8256
+SET timestamp=1732223285;
+SELECT * FROM users WHERE last_login > DATE_SUB(NOW(), INTERVAL 24 HOUR);
+# Time: 2024-11-21T22:08:07.691899
+# User@Host: user[user] @ localhost []
+# Query_time: 5.681952  Lock_time: 0.491099 Rows_sent: 439  Rows_examined: 7024
+SET timestamp=1732223287;
+SELECT * FROM inventory WHERE stock < threshold ORDER BY stock ASC;
+# Time: 2024-11-21T22:08:09.645197
+# User@Host: user[user] @ localhost []
+# Query_time: 8.811982  Lock_time: 0.496182 Rows_sent: 615  Rows_examined: 20295
+SET timestamp=1732223289;
+SELECT * FROM inventory WHERE stock < threshold ORDER BY stock ASC;
+# Time: 2024-11-21T22:08:12.327275
+# User@Host: user[user] @ localhost []
+# Query_time: 3.654383  Lock_time: 0.059847 Rows_sent: 632  Rows_examined: 632
+SET timestamp=1732223292;
+SELECT p.*, c.name FROM products p JOIN categories c ON p.category_id = c.id;
+# Time: 2024-11-21T22:08:13.799830
+# User@Host: user[user] @ localhost []
+# Query_time: 7.131930  Lock_time: 0.134300 Rows_sent: 475  Rows_examined: 475
+SET timestamp=1732223293;
+SELECT * FROM inventory WHERE stock < threshold ORDER BY stock ASC;
+# Time: 2024-11-21T22:08:14.318909
+# User@Host: user[user] @ localhost []
+# Query_time: 5.580002  Lock_time: 0.393741 Rows_sent: 755  Rows_examined: 64175
+SET timestamp=1732223294;
+SELECT * FROM inventory WHERE stock < threshold ORDER BY stock ASC;
+# Time: 2024-11-21T22:08:16.447702
+# User@Host: user[user] @ localhost []
+# Query_time: 7.881100  Lock_time: 0.303057 Rows_sent: 948  Rows_examined: 16116
+SET timestamp=1732223296;
+SELECT COUNT(*) FROM orders WHERE status = 'pending' GROUP BY user_id;
+# Time: 2024-11-21T22:08:17.821310
+# User@Host: user[user] @ localhost []
+# Query_time: 7.884853  Lock_time: 0.474445 Rows_sent: 59  Rows_examined: 3422
+SET timestamp=1732223297;
+SELECT u.*, COUNT(o.id) FROM users u LEFT JOIN orders o ON u.id = o.user_id GROUP BY u.id;
+# Time: 2024-11-21T22:08:18.628586
+# User@Host: user[user] @ localhost []
+# Query_time: 7.777035  Lock_time: 0.098392 Rows_sent: 705  Rows_examined: 45120
+SET timestamp=1732223298;
+SELECT p.*, c.name FROM products p JOIN categories c ON p.category_id = c.id;
+# Time: 2024-11-21T22:08:19.293128
+# User@Host: user[user] @ localhost []
+# Query_time: 1.927819  Lock_time: 0.199038 Rows_sent: 814  Rows_examined: 47212
+SET timestamp=1732223299;
+SELECT * FROM inventory WHERE stock < threshold ORDER BY stock ASC;
+# Time: 2024-11-21T22:08:19.882440
+# User@Host: user[user] @ localhost []
+# Query_time: 1.112965  Lock_time: 0.432956 Rows_sent: 258  Rows_examined: 1290
+SET timestamp=1732223299;
+SELECT * FROM inventory WHERE stock < threshold ORDER BY stock ASC;
+# Time: 2024-11-21T22:08:20.135102
+# User@Host: user[user] @ localhost []
+# Query_time: 6.168203  Lock_time: 0.098024 Rows_sent: 344  Rows_examined: 344
+SET timestamp=1732223300;
+SELECT * FROM inventory WHERE stock < threshold ORDER BY stock ASC;
+# Time: 2024-11-21T22:08:20.550449
+# User@Host: user[user] @ localhost []
+# Query_time: 8.961659  Lock_time: 0.311117 Rows_sent: 358  Rows_examined: 26850
+SET timestamp=1732223300;
+SELECT u.*, COUNT(o.id) FROM users u LEFT JOIN orders o ON u.id = o.user_id GROUP BY u.id;
+# Time: 2024-11-21T22:08:20.793923
+# User@Host: user[user] @ localhost []
+# Query_time: 1.488774  Lock_time: 0.104082 Rows_sent: 695  Rows_examined: 22240
+SET timestamp=1732223300;
+SELECT u.*, COUNT(o.id) FROM users u LEFT JOIN orders o ON u.id = o.user_id GROUP BY u.id;
+# Time: 2024-11-21T22:08:20.921810
+# User@Host: user[user] @ localhost []
+# Query_time: 4.316836  Lock_time: 0.468879 Rows_sent: 224  Rows_examined: 10752
+SET timestamp=1732223300;
+SELECT COUNT(*) FROM orders WHERE status = 'pending' GROUP BY user_id;
+# Time: 2024-11-21T22:08:23.183384
+# User@Host: user[user] @ localhost []
+# Query_time: 9.522482  Lock_time: 0.142964 Rows_sent: 217  Rows_examined: 13888
+SET timestamp=1732223303;
+SELECT COUNT(*) FROM orders WHERE status = 'pending' GROUP BY user_id;
+# Time: 2024-11-21T22:08:23.858333
+# User@Host: user[user] @ localhost []
+# Query_time: 9.905827  Lock_time: 0.037047 Rows_sent: 795  Rows_examined: 5565
+SET timestamp=1732223303;
+SELECT u.*, COUNT(o.id) FROM users u LEFT JOIN orders o ON u.id = o.user_id GROUP BY u.id;
+# Time: 2024-11-21T22:08:24.144360
+# User@Host: user[user] @ localhost []
+# Query_time: 1.002350  Lock_time: 0.022515 Rows_sent: 162  Rows_examined: 1620
+SET timestamp=1732223304;
+SELECT p.*, c.name FROM products p JOIN categories c ON p.category_id = c.id;
+# Time: 2024-11-21T22:08:25.303561
+# User@Host: user[user] @ localhost []
+# Query_time: 7.873305  Lock_time: 0.250800 Rows_sent: 140  Rows_examined: 11340
+SET timestamp=1732223305;
+SELECT * FROM users WHERE last_login > DATE_SUB(NOW(), INTERVAL 24 HOUR);
+# Time: 2024-11-21T22:08:26.104751
+# User@Host: user[user] @ localhost []
+# Query_time: 7.726399  Lock_time: 0.216282 Rows_sent: 429  Rows_examined: 10725
+SET timestamp=1732223306;
+SELECT COUNT(*) FROM orders WHERE status = 'pending' GROUP BY user_id;
+# Time: 2024-11-21T22:08:26.849803
+# User@Host: user[user] @ localhost []
+# Query_time: 6.644686  Lock_time: 0.113516 Rows_sent: 592  Rows_examined: 592
+SET timestamp=1732223306;
+SELECT * FROM users WHERE last_login > DATE_SUB(NOW(), INTERVAL 24 HOUR);
+# Time: 2024-11-21T22:08:28.148941
+# User@Host: user[user] @ localhost []
+# Query_time: 7.485960  Lock_time: 0.258160 Rows_sent: 556  Rows_examined: 47260
+SET timestamp=1732223308;
+SELECT u.*, COUNT(o.id) FROM users u LEFT JOIN orders o ON u.id = o.user_id GROUP BY u.id;
+# Time: 2024-11-21T22:08:28.547003
+# User@Host: user[user] @ localhost []
+# Query_time: 9.064516  Lock_time: 0.219612 Rows_sent: 749  Rows_examined: 47936
+SET timestamp=1732223308;
+SELECT p.*, c.name FROM products p JOIN categories c ON p.category_id = c.id;
+# Time: 2024-11-21T22:08:28.846393
+# User@Host: user[user] @ localhost []
+# Query_time: 4.499877  Lock_time: 0.499805 Rows_sent: 565  Rows_examined: 13560
+SET timestamp=1732223308;
+SELECT * FROM inventory WHERE stock < threshold ORDER BY stock ASC;
+# Time: 2024-11-21T22:08:32.380563
+# User@Host: user[user] @ localhost []
+# Query_time: 1.025811  Lock_time: 0.238499 Rows_sent: 863  Rows_examined: 73355
+SET timestamp=1732223312;
+SELECT u.*, COUNT(o.id) FROM users u LEFT JOIN orders o ON u.id = o.user_id GROUP BY u.id;
+# Time: 2024-11-21T22:08:33.140054
+# User@Host: user[user] @ localhost []
+# Query_time: 3.365965  Lock_time: 0.084657 Rows_sent: 401  Rows_examined: 11629
+SET timestamp=1732223313;
+SELECT * FROM inventory WHERE stock < threshold ORDER BY stock ASC;
+# Time: 2024-11-21T22:08:35.783940
+# User@Host: user[user] @ localhost []
+# Query_time: 1.003790  Lock_time: 0.189094 Rows_sent: 128  Rows_examined: 8192
+SET timestamp=1732223315;
+SELECT u.*, COUNT(o.id) FROM users u LEFT JOIN orders o ON u.id = o.user_id GROUP BY u.id;
+# Time: 2024-11-21T22:08:38.339147
+# User@Host: user[user] @ localhost []
+# Query_time: 2.093541  Lock_time: 0.360865 Rows_sent: 608  Rows_examined: 54720
+SET timestamp=1732223318;
+SELECT * FROM users WHERE last_login > DATE_SUB(NOW(), INTERVAL 24 HOUR);
+# Time: 2024-11-21T22:08:38.889115
+# User@Host: user[user] @ localhost []
+# Query_time: 4.291935  Lock_time: 0.388941 Rows_sent: 416  Rows_examined: 6656
+SET timestamp=1732223318;
+SELECT * FROM users WHERE last_login > DATE_SUB(NOW(), INTERVAL 24 HOUR);
+# Time: 2024-11-21T22:08:39.953810
+# User@Host: user[user] @ localhost []
+# Query_time: 2.504096  Lock_time: 0.424131 Rows_sent: 210  Rows_examined: 3570
+SET timestamp=1732223319;
+SELECT * FROM inventory WHERE stock < threshold ORDER BY stock ASC;
+# Time: 2024-11-21T22:08:40.622123
+# User@Host: user[user] @ localhost []
+# Query_time: 8.470209  Lock_time: 0.362504 Rows_sent: 448  Rows_examined: 3584
+SET timestamp=1732223320;
+SELECT u.*, COUNT(o.id) FROM users u LEFT JOIN orders o ON u.id = o.user_id GROUP BY u.id;
+# Time: 2024-11-21T22:08:41.625088
+# User@Host: user[user] @ localhost []
+# Query_time: 4.994578  Lock_time: 0.320419 Rows_sent: 461  Rows_examined: 27660
+SET timestamp=1732223321;
+SELECT * FROM users WHERE last_login > DATE_SUB(NOW(), INTERVAL 24 HOUR);
+# Time: 2024-11-21T22:08:43.965179
+# User@Host: user[user] @ localhost []
+# Query_time: 5.264038  Lock_time: 0.203808 Rows_sent: 547  Rows_examined: 51418
+SET timestamp=1732223323;
+SELECT u.*, COUNT(o.id) FROM users u LEFT JOIN orders o ON u.id = o.user_id GROUP BY u.id;
+# Time: 2024-11-21T22:08:44.364089
+# User@Host: user[user] @ localhost []
+# Query_time: 2.565290  Lock_time: 0.379060 Rows_sent: 100  Rows_examined: 4500
+SET timestamp=1732223324;
+SELECT p.*, c.name FROM products p JOIN categories c ON p.category_id = c.id;
+# Time: 2024-11-21T22:08:45.169137
+# User@Host: user[user] @ localhost []
+# Query_time: 3.570982  Lock_time: 0.475748 Rows_sent: 733  Rows_examined: 62305
+SET timestamp=1732223325;
+SELECT * FROM users WHERE last_login > DATE_SUB(NOW(), INTERVAL 24 HOUR);
+# Time: 2024-11-21T22:08:45.502854
+# User@Host: user[user] @ localhost []
+# Query_time: 2.106830  Lock_time: 0.230464 Rows_sent: 960  Rows_examined: 48960
+SET timestamp=1732223325;
+SELECT p.*, c.name FROM products p JOIN categories c ON p.category_id = c.id;
+# Time: 2024-11-21T22:08:45.835722
+# User@Host: user[user] @ localhost []
+# Query_time: 3.640889  Lock_time: 0.112343 Rows_sent: 265  Rows_examined: 2385
+SET timestamp=1732223325;
+SELECT u.*, COUNT(o.id) FROM users u LEFT JOIN orders o ON u.id = o.user_id GROUP BY u.id;
+# Time: 2024-11-21T22:08:48.283650
+# User@Host: user[user] @ localhost []
+# Query_time: 3.254229  Lock_time: 0.227151 Rows_sent: 71  Rows_examined: 6248
+SET timestamp=1732223328;
+SELECT u.*, COUNT(o.id) FROM users u LEFT JOIN orders o ON u.id = o.user_id GROUP BY u.id;
+# Time: 2024-11-21T22:08:48.724069
+# User@Host: user[user] @ localhost []
+# Query_time: 9.456124  Lock_time: 0.418069 Rows_sent: 521  Rows_examined: 7815
+SET timestamp=1732223328;
+SELECT COUNT(*) FROM orders WHERE status = 'pending' GROUP BY user_id;
+# Time: 2024-11-21T22:08:49.433191
+# User@Host: user[user] @ localhost []
+# Query_time: 8.994571  Lock_time: 0.050960 Rows_sent: 475  Rows_examined: 31350
+SET timestamp=1732223329;
+SELECT * FROM users WHERE last_login > DATE_SUB(NOW(), INTERVAL 24 HOUR);
+# Time: 2024-11-21T22:08:49.762765
+# User@Host: user[user] @ localhost []
+# Query_time: 5.443789  Lock_time: 0.454022 Rows_sent: 696  Rows_examined: 52896
+SET timestamp=1732223329;
+SELECT * FROM users WHERE last_login > DATE_SUB(NOW(), INTERVAL 24 HOUR);
+# Time: 2024-11-21T22:08:53.535189
+# User@Host: user[user] @ localhost []
+# Query_time: 9.957685  Lock_time: 0.038618 Rows_sent: 924  Rows_examined: 88704
+SET timestamp=1732223333;
+SELECT * FROM users WHERE last_login > DATE_SUB(NOW(), INTERVAL 24 HOUR);
+# Time: 2024-11-21T22:08:54.128878
+# User@Host: user[user] @ localhost []
+# Query_time: 5.127261  Lock_time: 0.471078 Rows_sent: 86  Rows_examined: 3096
+SET timestamp=1732223334;
+SELECT * FROM users WHERE last_login > DATE_SUB(NOW(), INTERVAL 24 HOUR);
+# Time: 2024-11-21T22:08:54.304427
+# User@Host: user[user] @ localhost []
+# Query_time: 1.772016  Lock_time: 0.181487 Rows_sent: 969  Rows_examined: 47481
+SET timestamp=1732223334;
+SELECT u.*, COUNT(o.id) FROM users u LEFT JOIN orders o ON u.id = o.user_id GROUP BY u.id;
+# Time: 2024-11-21T22:08:56.844839
+# User@Host: user[user] @ localhost []
+# Query_time: 2.083976  Lock_time: 0.475173 Rows_sent: 586  Rows_examined: 54498
+SET timestamp=1732223336;
+SELECT p.*, c.name FROM products p JOIN categories c ON p.category_id = c.id;
+# Time: 2024-11-21T22:08:57.773937
+# User@Host: user[user] @ localhost []
+# Query_time: 6.628760  Lock_time: 0.176980 Rows_sent: 11  Rows_examined: 451
+SET timestamp=1732223337;
+SELECT u.*, COUNT(o.id) FROM users u LEFT JOIN orders o ON u.id = o.user_id GROUP BY u.id;
+# Time: 2024-11-21T22:08:58.068168
+# User@Host: user[user] @ localhost []
+# Query_time: 6.847542  Lock_time: 0.476122 Rows_sent: 808  Rows_examined: 37168
+SET timestamp=1732223338;
+SELECT COUNT(*) FROM orders WHERE status = 'pending' GROUP BY user_id;
+# Time: 2024-11-21T22:08:58.321292
+# User@Host: user[user] @ localhost []
+# Query_time: 9.759500  Lock_time: 0.104198 Rows_sent: 356  Rows_examined: 11392
+SET timestamp=1732223338;
+SELECT * FROM users WHERE last_login > DATE_SUB(NOW(), INTERVAL 24 HOUR);
+# Time: 2024-11-21T22:09:00.085533
+# User@Host: user[user] @ localhost []
+# Query_time: 9.769336  Lock_time: 0.239045 Rows_sent: 663  Rows_examined: 19890
+SET timestamp=1732223340;
+SELECT * FROM inventory WHERE stock < threshold ORDER BY stock ASC;
+# Time: 2024-11-21T22:09:00.213294
+# User@Host: user[user] @ localhost []
+# Query_time: 4.622810  Lock_time: 0.255677 Rows_sent: 632  Rows_examined: 40448
+SET timestamp=1732223340;
+SELECT * FROM inventory WHERE stock < threshold ORDER BY stock ASC;
+# Time: 2024-11-21T22:09:01.502194
+# User@Host: user[user] @ localhost []
+# Query_time: 3.635285  Lock_time: 0.317353 Rows_sent: 863  Rows_examined: 59547
+SET timestamp=1732223341;
+SELECT * FROM inventory WHERE stock < threshold ORDER BY stock ASC;
+# Time: 2024-11-21T22:09:02.914875
+# User@Host: user[user] @ localhost []
+# Query_time: 7.505456  Lock_time: 0.137494 Rows_sent: 984  Rows_examined: 95448
+SET timestamp=1732223342;
+SELECT * FROM users WHERE last_login > DATE_SUB(NOW(), INTERVAL 24 HOUR);
+# Time: 2024-11-21T22:09:03.970956
+# User@Host: user[user] @ localhost []
+# Query_time: 8.139818  Lock_time: 0.438997 Rows_sent: 56  Rows_examined: 3360
+SET timestamp=1732223343;
+SELECT u.*, COUNT(o.id) FROM users u LEFT JOIN orders o ON u.id = o.user_id GROUP BY u.id;
+# Time: 2024-11-21T22:09:06.945192
+# User@Host: user[user] @ localhost []
+# Query_time: 8.244684  Lock_time: 0.254145 Rows_sent: 162  Rows_examined: 13284
+SET timestamp=1732223346;
+SELECT p.*, c.name FROM products p JOIN categories c ON p.category_id = c.id;
+# Time: 2024-11-21T22:09:08.069903
+# User@Host: user[user] @ localhost []
+# Query_time: 7.257662  Lock_time: 0.162228 Rows_sent: 642  Rows_examined: 21186
+SET timestamp=1732223348;
+SELECT * FROM users WHERE last_login > DATE_SUB(NOW(), INTERVAL 24 HOUR);
+# Time: 2024-11-21T22:09:10.187738
+# User@Host: user[user] @ localhost []
+# Query_time: 7.270763  Lock_time: 0.299607 Rows_sent: 600  Rows_examined: 27000
+SET timestamp=1732223350;
+SELECT * FROM inventory WHERE stock < threshold ORDER BY stock ASC;
+# Time: 2024-11-21T22:09:10.744331
+# User@Host: user[user] @ localhost []
+# Query_time: 6.033933  Lock_time: 0.359752 Rows_sent: 249  Rows_examined: 13695
+SET timestamp=1732223350;
+SELECT p.*, c.name FROM products p JOIN categories c ON p.category_id = c.id;
+# Time: 2024-11-21T22:09:10.848322
+# User@Host: user[user] @ localhost []
+# Query_time: 7.675363  Lock_time: 0.325346 Rows_sent: 86  Rows_examined: 2666
+SET timestamp=1732223350;
+SELECT COUNT(*) FROM orders WHERE status = 'pending' GROUP BY user_id;
+# Time: 2024-11-21T22:09:13.205748
+# User@Host: user[user] @ localhost []
+# Query_time: 4.149721  Lock_time: 0.392659 Rows_sent: 766  Rows_examined: 19916
+SET timestamp=1732223353;
+SELECT u.*, COUNT(o.id) FROM users u LEFT JOIN orders o ON u.id = o.user_id GROUP BY u.id;
+# Time: 2024-11-21T22:09:14.275534
+# User@Host: user[user] @ localhost []
+# Query_time: 4.351867  Lock_time: 0.357773 Rows_sent: 201  Rows_examined: 13668
+SET timestamp=1732223354;
+SELECT u.*, COUNT(o.id) FROM users u LEFT JOIN orders o ON u.id = o.user_id GROUP BY u.id;
+# Time: 2024-11-21T22:09:14.903949
+# User@Host: user[user] @ localhost []
+# Query_time: 7.460517  Lock_time: 0.138988 Rows_sent: 575  Rows_examined: 18400
+SET timestamp=1732223354;
+SELECT u.*, COUNT(o.id) FROM users u LEFT JOIN orders o ON u.id = o.user_id GROUP BY u.id;
+# Time: 2024-11-21T22:09:18.501986
+# User@Host: user[user] @ localhost []
+# Query_time: 3.220071  Lock_time: 0.088396 Rows_sent: 32  Rows_examined: 896
+SET timestamp=1732223358;
+SELECT * FROM users WHERE last_login > DATE_SUB(NOW(), INTERVAL 24 HOUR);
+# Time: 2024-11-21T22:09:19.235442
+# User@Host: user[user] @ localhost []
+# Query_time: 8.859192  Lock_time: 0.401817 Rows_sent: 160  Rows_examined: 15520
+SET timestamp=1732223359;
+SELECT u.*, COUNT(o.id) FROM users u LEFT JOIN orders o ON u.id = o.user_id GROUP BY u.id;
+# Time: 2024-11-21T22:09:19.697418
+# User@Host: user[user] @ localhost []
+# Query_time: 5.077198  Lock_time: 0.325753 Rows_sent: 863  Rows_examined: 7767
+SET timestamp=1732223359;
+SELECT * FROM users WHERE last_login > DATE_SUB(NOW(), INTERVAL 24 HOUR);
+# Time: 2024-11-21T22:09:19.920306
+# User@Host: user[user] @ localhost []
+# Query_time: 9.654140  Lock_time: 0.325417 Rows_sent: 607  Rows_examined: 47346
+SET timestamp=1732223359;
+SELECT p.*, c.name FROM products p JOIN categories c ON p.category_id = c.id;
+# Time: 2024-11-21T22:09:21.638582
+# User@Host: user[user] @ localhost []
+# Query_time: 8.398110  Lock_time: 0.177721 Rows_sent: 614  Rows_examined: 20262
+SET timestamp=1732223361;
+SELECT COUNT(*) FROM orders WHERE status = 'pending' GROUP BY user_id;
+# Time: 2024-11-21T22:09:23.321282
+# User@Host: user[user] @ localhost []
+# Query_time: 5.875515  Lock_time: 0.292619 Rows_sent: 566  Rows_examined: 46978
+SET timestamp=1732223363;
+SELECT p.*, c.name FROM products p JOIN categories c ON p.category_id = c.id;
+# Time: 2024-11-21T22:09:23.738290
+# User@Host: user[user] @ localhost []
+# Query_time: 2.523396  Lock_time: 0.434728 Rows_sent: 657  Rows_examined: 49275
+SET timestamp=1732223363;
+SELECT * FROM users WHERE last_login > DATE_SUB(NOW(), INTERVAL 24 HOUR);
+# Time: 2024-11-21T22:09:24.032178
+# User@Host: user[user] @ localhost []
+# Query_time: 7.776918  Lock_time: 0.045504 Rows_sent: 285  Rows_examined: 17385
+SET timestamp=1732223364;
+SELECT * FROM inventory WHERE stock < threshold ORDER BY stock ASC;
+# Time: 2024-11-21T22:09:25.018794
+# User@Host: user[user] @ localhost []
+# Query_time: 7.815471  Lock_time: 0.342838 Rows_sent: 530  Rows_examined: 30740
+SET timestamp=1732223365;
+SELECT * FROM users WHERE last_login > DATE_SUB(NOW(), INTERVAL 24 HOUR);
+# Time: 2024-11-21T22:09:25.643997
+# User@Host: user[user] @ localhost []
+# Query_time: 8.995382  Lock_time: 0.133822 Rows_sent: 723  Rows_examined: 70854
+SET timestamp=1732223365;
+SELECT * FROM users WHERE last_login > DATE_SUB(NOW(), INTERVAL 24 HOUR);
+# Time: 2024-11-21T22:09:25.998145
+# User@Host: user[user] @ localhost []
+# Query_time: 4.232930  Lock_time: 0.240856 Rows_sent: 24  Rows_examined: 1272
+SET timestamp=1732223365;
+SELECT * FROM users WHERE last_login > DATE_SUB(NOW(), INTERVAL 24 HOUR);
+# Time: 2024-11-21T22:09:28.296225
+# User@Host: user[user] @ localhost []
+# Query_time: 6.714305  Lock_time: 0.333813 Rows_sent: 663  Rows_examined: 39780
+SET timestamp=1732223368;
+SELECT * FROM inventory WHERE stock < threshold ORDER BY stock ASC;
+# Time: 2024-11-21T22:09:28.775553
+# User@Host: user[user] @ localhost []
+# Query_time: 9.593701  Lock_time: 0.418592 Rows_sent: 685  Rows_examined: 58910
+SET timestamp=1732223368;
+SELECT u.*, COUNT(o.id) FROM users u LEFT JOIN orders o ON u.id = o.user_id GROUP BY u.id;
+# Time: 2024-11-21T22:09:32.571507
+# User@Host: user[user] @ localhost []
+# Query_time: 5.085099  Lock_time: 0.148024 Rows_sent: 804  Rows_examined: 73164
+SET timestamp=1732223372;
+SELECT COUNT(*) FROM orders WHERE status = 'pending' GROUP BY user_id;
+# Time: 2024-11-21T22:09:33.952351
+# User@Host: user[user] @ localhost []
+# Query_time: 7.866391  Lock_time: 0.173896 Rows_sent: 640  Rows_examined: 57600
+SET timestamp=1732223373;
+SELECT * FROM inventory WHERE stock < threshold ORDER BY stock ASC;
+# Time: 2024-11-21T22:09:35.098827
+# User@Host: user[user] @ localhost []
+# Query_time: 6.950113  Lock_time: 0.344565 Rows_sent: 842  Rows_examined: 56414
+SET timestamp=1732223375;
+SELECT u.*, COUNT(o.id) FROM users u LEFT JOIN orders o ON u.id = o.user_id GROUP BY u.id;
+# Time: 2024-11-21T22:09:36.231636
+# User@Host: user[user] @ localhost []
+# Query_time: 1.638699  Lock_time: 0.317875 Rows_sent: 416  Rows_examined: 8320
+SET timestamp=1732223376;
+SELECT * FROM inventory WHERE stock < threshold ORDER BY stock ASC;
+# Time: 2024-11-21T22:09:36.843144
+# User@Host: user[user] @ localhost []
+# Query_time: 1.531097  Lock_time: 0.071807 Rows_sent: 601  Rows_examined: 48080
+SET timestamp=1732223376;
+SELECT COUNT(*) FROM orders WHERE status = 'pending' GROUP BY user_id;
+# Time: 2024-11-21T22:09:37.426119
+# User@Host: user[user] @ localhost []
+# Query_time: 7.021961  Lock_time: 0.166279 Rows_sent: 651  Rows_examined: 7161
+SET timestamp=1732223377;
+SELECT * FROM inventory WHERE stock < threshold ORDER BY stock ASC;
+# Time: 2024-11-21T22:09:37.608315
+# User@Host: user[user] @ localhost []
+# Query_time: 3.919078  Lock_time: 0.350594 Rows_sent: 323  Rows_examined: 10982
+SET timestamp=1732223377;
+SELECT u.*, COUNT(o.id) FROM users u LEFT JOIN orders o ON u.id = o.user_id GROUP BY u.id;
+# Time: 2024-11-21T22:09:38.204174
+# User@Host: user[user] @ localhost []
+# Query_time: 9.693295  Lock_time: 0.191450 Rows_sent: 696  Rows_examined: 13920
+SET timestamp=1732223378;
+SELECT * FROM users WHERE last_login > DATE_SUB(NOW(), INTERVAL 24 HOUR);
+# Time: 2024-11-21T22:09:38.827201
+# User@Host: user[user] @ localhost []
+# Query_time: 1.905774  Lock_time: 0.478418 Rows_sent: 146  Rows_examined: 12556
+SET timestamp=1732223378;
+SELECT * FROM inventory WHERE stock < threshold ORDER BY stock ASC;
+# Time: 2024-11-21T22:09:39.239561
+# User@Host: user[user] @ localhost []
+# Query_time: 5.896659  Lock_time: 0.136435 Rows_sent: 383  Rows_examined: 25278
+SET timestamp=1732223379;
+SELECT * FROM users WHERE last_login > DATE_SUB(NOW(), INTERVAL 24 HOUR);
+# Time: 2024-11-21T22:09:39.718117
+# User@Host: user[user] @ localhost []
+# Query_time: 9.474591  Lock_time: 0.113988 Rows_sent: 127  Rows_examined: 381
+SET timestamp=1732223379;
+SELECT * FROM inventory WHERE stock < threshold ORDER BY stock ASC;
+# Time: 2024-11-21T22:09:40.820979
+# User@Host: user[user] @ localhost []
+# Query_time: 9.340534  Lock_time: 0.043127 Rows_sent: 861  Rows_examined: 73185
+SET timestamp=1732223380;
+SELECT * FROM inventory WHERE stock < threshold ORDER BY stock ASC;
+# Time: 2024-11-21T22:09:41.186197
+# User@Host: user[user] @ localhost []
+# Query_time: 6.392261  Lock_time: 0.427006 Rows_sent: 474  Rows_examined: 23226
+SET timestamp=1732223381;
+SELECT * FROM users WHERE last_login > DATE_SUB(NOW(), INTERVAL 24 HOUR);
+# Time: 2024-11-21T22:09:42.198651
+# User@Host: user[user] @ localhost []
+# Query_time: 2.713331  Lock_time: 0.469979 Rows_sent: 305  Rows_examined: 3050
+SET timestamp=1732223382;
+SELECT u.*, COUNT(o.id) FROM users u LEFT JOIN orders o ON u.id = o.user_id GROUP BY u.id;
+# Time: 2024-11-21T22:09:42.531548
+# User@Host: user[user] @ localhost []
+# Query_time: 9.960503  Lock_time: 0.395176 Rows_sent: 299  Rows_examined: 29900
+SET timestamp=1732223382;
+SELECT COUNT(*) FROM orders WHERE status = 'pending' GROUP BY user_id;
+# Time: 2024-11-21T22:09:43.393742
+# User@Host: user[user] @ localhost []
+# Query_time: 9.848646  Lock_time: 0.052902 Rows_sent: 390  Rows_examined: 18330
+SET timestamp=1732223383;
+SELECT p.*, c.name FROM products p JOIN categories c ON p.category_id = c.id;
+# Time: 2024-11-21T22:09:45.180603
+# User@Host: user[user] @ localhost []
+# Query_time: 3.136967  Lock_time: 0.436144 Rows_sent: 650  Rows_examined: 14950
+SET timestamp=1732223385;
+SELECT u.*, COUNT(o.id) FROM users u LEFT JOIN orders o ON u.id = o.user_id GROUP BY u.id;
+# Time: 2024-11-21T22:09:46.230622
+# User@Host: user[user] @ localhost []
+# Query_time: 5.111897  Lock_time: 0.290680 Rows_sent: 770  Rows_examined: 23100
+SET timestamp=1732223386;
+SELECT * FROM users WHERE last_login > DATE_SUB(NOW(), INTERVAL 24 HOUR);
+# Time: 2024-11-21T22:09:46.892417
+# User@Host: user[user] @ localhost []
+# Query_time: 9.693175  Lock_time: 0.232649 Rows_sent: 996  Rows_examined: 71712
+SET timestamp=1732223386;
+SELECT p.*, c.name FROM products p JOIN categories c ON p.category_id = c.id;
+# Time: 2024-11-21T22:09:47.122235
+# User@Host: user[user] @ localhost []
+# Query_time: 3.848352  Lock_time: 0.180835 Rows_sent: 843  Rows_examined: 63225
+SET timestamp=1732223387;
+SELECT * FROM users WHERE last_login > DATE_SUB(NOW(), INTERVAL 24 HOUR);
+# Time: 2024-11-21T22:09:47.368977
+# User@Host: user[user] @ localhost []
+# Query_time: 1.440059  Lock_time: 0.300063 Rows_sent: 997  Rows_examined: 91724
+SET timestamp=1732223387;
+SELECT p.*, c.name FROM products p JOIN categories c ON p.category_id = c.id;
+# Time: 2024-11-21T22:09:48.804112
+# User@Host: user[user] @ localhost []
+# Query_time: 5.148885  Lock_time: 0.169323 Rows_sent: 381  Rows_examined: 36957
+SET timestamp=1732223388;
+SELECT p.*, c.name FROM products p JOIN categories c ON p.category_id = c.id;
+# Time: 2024-11-21T22:09:48.979020
+# User@Host: user[user] @ localhost []
+# Query_time: 5.054875  Lock_time: 0.464464 Rows_sent: 379  Rows_examined: 32973
+SET timestamp=1732223388;
+SELECT * FROM inventory WHERE stock < threshold ORDER BY stock ASC;
+# Time: 2024-11-21T22:09:50.135420
+# User@Host: user[user] @ localhost []
+# Query_time: 2.392569  Lock_time: 0.020955 Rows_sent: 54  Rows_examined: 2214
+SET timestamp=1732223390;
+SELECT * FROM inventory WHERE stock < threshold ORDER BY stock ASC;
+# Time: 2024-11-21T22:09:50.567628
+# User@Host: user[user] @ localhost []
+# Query_time: 9.466605  Lock_time: 0.462228 Rows_sent: 765  Rows_examined: 3825
+SET timestamp=1732223390;
+SELECT COUNT(*) FROM orders WHERE status = 'pending' GROUP BY user_id;
+# Time: 2024-11-21T22:09:50.930361
+# User@Host: user[user] @ localhost []
+# Query_time: 7.767027  Lock_time: 0.224005 Rows_sent: 188  Rows_examined: 1128
+SET timestamp=1732223390;
+SELECT * FROM users WHERE last_login > DATE_SUB(NOW(), INTERVAL 24 HOUR);
+# Time: 2024-11-21T22:09:52.355975
+# User@Host: user[user] @ localhost []
+# Query_time: 9.368623  Lock_time: 0.103036 Rows_sent: 805  Rows_examined: 62790
+SET timestamp=1732223392;
+SELECT COUNT(*) FROM orders WHERE status = 'pending' GROUP BY user_id;
+# Time: 2024-11-21T22:09:53.017243
+# User@Host: user[user] @ localhost []
+# Query_time: 4.210869  Lock_time: 0.245142 Rows_sent: 319  Rows_examined: 1914
+SET timestamp=1732223393;
+SELECT * FROM users WHERE last_login > DATE_SUB(NOW(), INTERVAL 24 HOUR);
+# Time: 2024-11-21T22:09:53.518915
+# User@Host: user[user] @ localhost []
+# Query_time: 3.162709  Lock_time: 0.417457 Rows_sent: 799  Rows_examined: 15980
+SET timestamp=1732223393;
+SELECT * FROM inventory WHERE stock < threshold ORDER BY stock ASC;
+# Time: 2024-11-21T22:09:53.802970
+# User@Host: user[user] @ localhost []
+# Query_time: 3.909679  Lock_time: 0.303368 Rows_sent: 939  Rows_examined: 14085
+SET timestamp=1732223393;
+SELECT * FROM inventory WHERE stock < threshold ORDER BY stock ASC;
+# Time: 2024-11-21T22:09:54.246262
+# User@Host: user[user] @ localhost []
+# Query_time: 7.021075  Lock_time: 0.382282 Rows_sent: 557  Rows_examined: 9469
+SET timestamp=1732223394;
+SELECT * FROM users WHERE last_login > DATE_SUB(NOW(), INTERVAL 24 HOUR);
+# Time: 2024-11-21T22:09:56.167060
+# User@Host: user[user] @ localhost []
+# Query_time: 3.982543  Lock_time: 0.495959 Rows_sent: 91  Rows_examined: 6097
+SET timestamp=1732223396;
+SELECT u.*, COUNT(o.id) FROM users u LEFT JOIN orders o ON u.id = o.user_id GROUP BY u.id;
+# Time: 2024-11-21T22:09:56.564092
+# User@Host: user[user] @ localhost []
+# Query_time: 7.780142  Lock_time: 0.052696 Rows_sent: 287  Rows_examined: 9184
+SET timestamp=1732223396;
+SELECT COUNT(*) FROM orders WHERE status = 'pending' GROUP BY user_id;
+# Time: 2024-11-21T22:09:57.164321
+# User@Host: user[user] @ localhost []
+# Query_time: 9.724498  Lock_time: 0.165857 Rows_sent: 362  Rows_examined: 25702
+SET timestamp=1732223397;
+SELECT u.*, COUNT(o.id) FROM users u LEFT JOIN orders o ON u.id = o.user_id GROUP BY u.id;
+# Time: 2024-11-21T22:09:57.613051
+# User@Host: user[user] @ localhost []
+# Query_time: 5.977402  Lock_time: 0.236431 Rows_sent: 819  Rows_examined: 51597
+SET timestamp=1732223397;
+SELECT * FROM inventory WHERE stock < threshold ORDER BY stock ASC;
+# Time: 2024-11-21T22:09:58.948415
+# User@Host: user[user] @ localhost []
+# Query_time: 5.228735  Lock_time: 0.248920 Rows_sent: 450  Rows_examined: 15750
+SET timestamp=1732223398;
+SELECT COUNT(*) FROM orders WHERE status = 'pending' GROUP BY user_id;
+# Time: 2024-11-21T22:10:02.462957
+# User@Host: user[user] @ localhost []
+# Query_time: 1.082819  Lock_time: 0.167208 Rows_sent: 362  Rows_examined: 1448
+SET timestamp=1732223402;
+SELECT * FROM inventory WHERE stock < threshold ORDER BY stock ASC;
+# Time: 2024-11-21T22:10:04.228423
+# User@Host: user[user] @ localhost []
+# Query_time: 2.743983  Lock_time: 0.268184 Rows_sent: 390  Rows_examined: 31590
+SET timestamp=1732223404;
+SELECT p.*, c.name FROM products p JOIN categories c ON p.category_id = c.id;
+# Time: 2024-11-21T22:10:04.951850
+# User@Host: user[user] @ localhost []
+# Query_time: 9.933920  Lock_time: 0.420183 Rows_sent: 334  Rows_examined: 14362
+SET timestamp=1732223404;
+SELECT * FROM inventory WHERE stock < threshold ORDER BY stock ASC;
+# Time: 2024-11-21T22:10:05.589906
+# User@Host: user[user] @ localhost []
+# Query_time: 3.552447  Lock_time: 0.147941 Rows_sent: 467  Rows_examined: 39695
+SET timestamp=1732223405;
+SELECT p.*, c.name FROM products p JOIN categories c ON p.category_id = c.id;
+# Time: 2024-11-21T22:10:05.932138
+# User@Host: user[user] @ localhost []
+# Query_time: 4.458082  Lock_time: 0.480410 Rows_sent: 126  Rows_examined: 10206
+SET timestamp=1732223405;
+SELECT u.*, COUNT(o.id) FROM users u LEFT JOIN orders o ON u.id = o.user_id GROUP BY u.id;
+# Time: 2024-11-21T22:10:06.865602
+# User@Host: user[user] @ localhost []
+# Query_time: 4.311809  Lock_time: 0.443937 Rows_sent: 68  Rows_examined: 4896
+SET timestamp=1732223406;
+SELECT * FROM inventory WHERE stock < threshold ORDER BY stock ASC;
+# Time: 2024-11-21T22:10:07.330072
+# User@Host: user[user] @ localhost []
+# Query_time: 8.841968  Lock_time: 0.151539 Rows_sent: 81  Rows_examined: 6723
+SET timestamp=1732223407;
+SELECT * FROM inventory WHERE stock < threshold ORDER BY stock ASC;
+# Time: 2024-11-21T22:10:08.625739
+# User@Host: user[user] @ localhost []
+# Query_time: 1.693409  Lock_time: 0.186076 Rows_sent: 309  Rows_examined: 3090
+SET timestamp=1732223408;
+SELECT COUNT(*) FROM orders WHERE status = 'pending' GROUP BY user_id;
+# Time: 2024-11-21T22:10:10.809034
+# User@Host: user[user] @ localhost []
+# Query_time: 9.292389  Lock_time: 0.358826 Rows_sent: 287  Rows_examined: 27552
+SET timestamp=1732223410;
+SELECT u.*, COUNT(o.id) FROM users u LEFT JOIN orders o ON u.id = o.user_id GROUP BY u.id;
+# Time: 2024-11-21T22:10:11.992536
+# User@Host: user[user] @ localhost []
+# Query_time: 3.598647  Lock_time: 0.284381 Rows_sent: 736  Rows_examined: 48576
+SET timestamp=1732223411;
+SELECT * FROM users WHERE last_login > DATE_SUB(NOW(), INTERVAL 24 HOUR);
+# Time: 2024-11-21T22:10:12.685147
+# User@Host: user[user] @ localhost []
+# Query_time: 6.304074  Lock_time: 0.004406 Rows_sent: 586  Rows_examined: 44536
+SET timestamp=1732223412;
+SELECT COUNT(*) FROM orders WHERE status = 'pending' GROUP BY user_id;
+# Time: 2024-11-21T22:10:13.267448
+# User@Host: user[user] @ localhost []
+# Query_time: 6.864178  Lock_time: 0.040375 Rows_sent: 846  Rows_examined: 26226
+SET timestamp=1732223413;
+SELECT p.*, c.name FROM products p JOIN categories c ON p.category_id = c.id;
+# Time: 2024-11-21T22:10:13.641659
+# User@Host: user[user] @ localhost []
+# Query_time: 4.023242  Lock_time: 0.216099 Rows_sent: 564  Rows_examined: 16356
+SET timestamp=1732223413;
+SELECT * FROM users WHERE last_login > DATE_SUB(NOW(), INTERVAL 24 HOUR);
