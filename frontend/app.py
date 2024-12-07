@@ -1,19 +1,66 @@
 from flask import Flask, request, render_template, flash, redirect, url_for
 import os
+import re
 from werkzeug.utils import secure_filename
+from datetime import datetime
+from dotenv import load_dotenv  # Add this import
+
+load_dotenv()  # Load environment variables
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'this-is-my-secret-key'  # Message flashing
-app.config['UPLOAD_FOLDER'] = 'uploads'
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16MB max file size
+
+# Get 'infra' environment variable
+infra = os.getenv('infra')
+
+# Set UPLOAD_FOLDER based on 'infra' variable
+if infra == 'docker':
+    app.config['UPLOAD_FOLDER'] = '/logs'
+else:
+    app.config['UPLOAD_FOLDER'] = 'uploads'
+
 ALLOWED_EXTENSIONS = {'txt', 'csv', 'json', 'log'}
 
 # Create uploads directory if it doesn't exist
 os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
 
+# Define base directories for each log type
+LOG_DIRS = {
+    'mysql': os.path.join(app.config['UPLOAD_FOLDER'], 'mysql'),
+    'nginx': os.path.join(app.config['UPLOAD_FOLDER'], 'nginx'),
+    'system': os.path.join(app.config['UPLOAD_FOLDER'], 'system')
+}
+
+# Create all required directories
+for directory in LOG_DIRS.values():
+    os.makedirs(directory, exist_ok=True)
+
 def allowed_file(filename):
     """Check if the file extension is allowed"""
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+def detect_log_type(file_content):
+    """Detect the type of log based on content patterns"""
+    # Convert bytes to string if necessary
+    if isinstance(file_content, bytes):
+        content = file_content.decode('utf-8', errors='ignore')
+    else:
+        content = file_content
+
+    # Check for MySQL slow query patterns
+    if re.search(r'# Time:|# User@Host:|# Query_time:', content):
+        return 'mysql'
+    
+    # Check for Nginx access log patterns (JSON format)
+    if re.search(r'{"timestamp":.*"request_method":.*"request_uri":.*"status":', content):
+        return 'nginx'
+    
+    # Check for system metrics patterns
+    if re.search(r'(cpu_usage|memory_usage|disk_usage|network_in|network_out|load_average)\s+\d+', content):
+        return 'system'
+    
+    return None
 
 # Dashboard URLs mapping
 DASHBOARD_URLS = {
@@ -48,20 +95,36 @@ def upload_files():
         
         uploaded_files = []
         for file in files:
-            if file and file.filename:
-                if allowed_file(file.filename):
-                    filename = secure_filename(file.filename)
-                    file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+            if file and file.filename and allowed_file(file.filename):
+                # Read file content to detect type
+                file_content = file.read()
+                log_type = detect_log_type(file_content)
+                
+                if log_type:
+                    # Reset file pointer to beginning
+                    file.seek(0)
+                    
+                    # Get the appropriate directory
+                    save_dir = LOG_DIRS[log_type]
+                    
+                    # Generate timestamp and create new filename
+                    timestamp = datetime.now().strftime('%Y%m%d-%H%M%S')
+                    original_ext = os.path.splitext(secure_filename(file.filename))[1]
+                    new_filename = f"{log_type}-{timestamp}{original_ext}"
+                    
+                    file_path = os.path.join(save_dir, new_filename)
                     
                     # Save the file
                     file.save(file_path)
-                    uploaded_files.append(filename)
+                    os.chmod(file_path, 0o777)  # Set permissions
+                    uploaded_files.append(f"{new_filename} ({log_type})")
                 else:
+                    flash(f'Unable to determine log type for {file.filename}')
+            else:
+                if file.filename:
                     flash(f'Invalid file type for {file.filename}')
         
         if uploaded_files:
-            # chmod 777 the uploaded files
-            os.chmod(app.config['UPLOAD_FOLDER'], 0o777)
             flash(f'Successfully uploaded: {", ".join(uploaded_files)}')
         
         return redirect(url_for('upload_files'))

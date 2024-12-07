@@ -63,6 +63,8 @@ services:
       - "80:5000"
     volumes:
       - ./logs:/logs
+    environment:
+      - infra=docker
 
 networks:
   elk:
