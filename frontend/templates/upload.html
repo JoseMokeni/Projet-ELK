@@ -7,9 +7,10 @@
     <style>
       body {
         font-family: Arial, sans-serif;
-        max-width: 800px;
+        // max-width: 800px;
         margin: 0 auto;
         padding: 20px;
+        height: 100vh;
       }
       .upload-form {
         border: 2px dashed #ccc;
@@ -38,6 +39,18 @@
       .submit-btn:hover {
         background-color: #45a049;
       }
+      .dashboard-form {
+        margin-top: 20px;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+      select {
+        padding: 8px;
+        margin-right: 10px;
+        border-radius: 4px;
+        border: 1px solid #ccc;
+      }
     </style>
   </head>
   <body>
@@ -57,6 +70,19 @@
         <input type="file" name="files[]" multiple accept=".txt,.log,.json" />
         <br />
         <button type="submit" class="submit-btn">Upload Files</button>
+      </form>
+    </div>
+
+    <div class="dashboard-form">
+      <form action="{{ url_for('show_dashboard') }}" method="GET">
+        <label for="dashboard">Select Dashboard:</label>
+        <select name="dashboard" id="dashboard" required>
+          <option value="">Choose a dashboard...</option>
+          <option value="mysql">MySQL Slow Queries</option>
+          <option value="nginx">Nginx Access</option>
+          <option value="system">System Metrics</option>
+        </select>
+        <button type="submit" class="submit-btn">Show Dashboard</button>
       </form>
     </div>
   </body>

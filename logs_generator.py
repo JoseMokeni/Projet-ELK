@@ -86,8 +86,7 @@ SET timestamp={int(now.timestamp())};
                 f.write(f"{metric} {value:.2f}\n")
 
 def main():
-    # Utilisation du générateur
-    generator = LogGenerator("logs")  # Le dossier doit correspondre à votre montage Docker
+    generator = LogGenerator("logs2")
     
     print("Démarrage de la génération des logs...")
     

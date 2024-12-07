@@ -15,7 +15,7 @@ services:
         hard: -1
     volumes:
       - ./elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
-      # - elasticsearch-data:/usr/share/elasticsearch/data
+      - elasticsearch-data:/usr/share/elasticsearch/data
     ports:
       - "9200:9200"
     networks:
@@ -35,11 +35,6 @@ services:
       - ./logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml
       - ./logstash/pipeline:/usr/share/logstash/pipeline
       - ./logs:/logs
-    ports:
-      - "5044:5044"
-      - "5000:5000/tcp"
-      - "5000:5000/udp"
-      - "9600:9600"
     networks:
       - elk
     depends_on:
@@ -60,10 +55,19 @@ services:
     depends_on:
       elasticsearch:
         condition: service_healthy
+  frontend:
+    build:
+      context: ./frontend
+    container_name: frontend
+    ports:
+      - "80:5000"
+    volumes:
+      - ./logs:/logs
 
 networks:
   elk:
     driver: bridge
-# volumes:
-#   elasticsearch-data:
-#     driver: local
+
+volumes:
+  elasticsearch-data:
+    driver: local
