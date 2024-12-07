@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, flash, redirect, url_for
+from flask import Flask, request, render_template, flash, redirect, url_for, send_from_directory
 import os
 import re
 from werkzeug.utils import secure_filename
@@ -64,9 +64,9 @@ def detect_log_type(file_content):
 
 # Dashboard URLs mapping
 DASHBOARD_URLS = {
-    'mysql': "http://localhost:5601/app/dashboards#/view/8029e723-caa7-4bb0-93bd-eda0f1bebffa?embed=true&_g=(refreshInterval%3A(pause%3A!t%2Cvalue%3A60000)%2Ctime%3A(from%3A'2010-12-06T23%3A43%3A00.141Z'%2Cto%3Anow))",
-    'nginx': 'http://localhost:5601/app/dashboards#/view/nginx-access-dashboard?embed=true&_g=(refreshInterval:(pause:!t,value:60000),time:(from:now-24h,to:now))&hide-filter-bar=true',
-    'system': 'http://localhost:5601/app/dashboards#/view/8029e723-caa7-4bb0-93bd-eda0f1bebffa?embed=true&_g=(refreshInterval:(pause:!t,value:60000),time:(from:now-24h,to:now))&hide-filter-bar=true'
+    'mysql': "http://localhost:5601/app/dashboards#/view/8029e723-caa7-4bb0-93bd-eda0f1bebffa?embed=true&_g=(refreshInterval%3A(pause%3A!t%2Cvalue%3A60000)%2Ctime%3A(from%3A'2010-12-06T23%3A43%3A00.141Z'%2Cto%3Anow))&show-time-filter=true",
+    'nginx': "http://localhost:5601/app/dashboards#/view/fdadd43f-5c66-4334-9fbe-d142dd837d00?embed=true&_g=(refreshInterval%3A(pause%3A!t%2Cvalue%3A60000)%2Ctime%3A(from%3Anow-15y%2Cto%3Anow))&show-time-filter=true",
+    'system': "http://localhost:5601/app/dashboards#/view/85500e31-d06f-4eb6-89d8-0a00fdcfab90?embed=true&_g=(refreshInterval%3A(pause%3A!t%2Cvalue%3A60000)%2Ctime%3A(from%3Anow-15y%2Cto%3Anow))&show-time-filter=true"
 }
 @app.route('/dashboard')
 def show_dashboard():
@@ -77,6 +77,45 @@ def show_dashboard():
     
     dashboard_url = DASHBOARD_URLS[dashboard_type]
     return render_template('dashboard.html', dashboard_url=dashboard_url)
+
+def parse_filename_date(filename):
+    """Extract datetime from filename format: logtype-YYYYMMDD-HHMMSS.ext"""
+    match = re.match(r'.*-(\d{8})-(\d{6})\..*', filename)
+    if match:
+        date_str, time_str = match.groups()
+        try:
+            return datetime.strptime(f"{date_str}{time_str}", "%Y%m%d%H%M%S").strftime("%Y-%m-%d %H:%M:%S")
+        except ValueError:
+            return "Unknown date"
+    return "Unknown date"
+
+def get_files_by_type():
+    """Get all uploaded files organized by type with their upload dates"""
+    files_by_type = {}
+    for log_type, directory in LOG_DIRS.items():
+        files = []
+        if os.path.exists(directory):
+            for filename in os.listdir(directory):
+                files.append({
+                    'name': filename,
+                    'datetime': parse_filename_date(filename)
+                })
+        files_by_type[log_type] = sorted(files, key=lambda x: x['datetime'], reverse=True)
+    return files_by_type
+
+@app.route('/history')
+def upload_history():
+    files_by_type = get_files_by_type()
+    return render_template('history.html', files_by_type=files_by_type)
+
+@app.route('/download/<log_type>/<filename>')
+def download_file(log_type, filename):
+    if log_type not in LOG_DIRS:
+        flash('Invalid log type')
+        return redirect(url_for('upload_history'))
+    
+    directory = LOG_DIRS[log_type]
+    return send_from_directory(directory, filename, as_attachment=True)
 
 @app.route('/', methods=['GET', 'POST'])
 def upload_files():

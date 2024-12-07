@@ -1,36 +1,40 @@
-
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dashboard View</title>
     <style>
-        body {
-            margin: 0;
-            padding: 0;
-            height: 100vh;
-        }
-        .dashboard-container {
-            height: 100vh;
-        }
-        .back-btn {
-            position: fixed;
-            top: 10px;
-            left: 10px;
-            z-index: 1000;
-            padding: 10px 20px;
-            background-color: #4caf50;
-            color: white;
-            text-decoration: none;
-            border-radius: 4px;
-        }
+      body {
+        margin: 0;
+        padding: 10px;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+      .dashboard-container {
+        height: 100vh;
+      }
+      .back-btn {
+        padding: 10px 20px;
+        background-color: #4caf50;
+        color: white;
+        text-decoration: none;
+        border-radius: 4px;
+        width: 150px;
+        text-align: center;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <a href="{{ url_for('upload_files') }}" class="back-btn">Back to Upload</a>
     <div class="dashboard-container">
-        <iframe src="{{ dashboard_url }}" height="100%" width="100%" frameborder="0"></iframe>
+      <iframe
+        src="{{ dashboard_url }}"
+        height="100%"
+        width="100%"
+        frameborder="0"
+      ></iframe>
     </div>
-</body>
+  </body>
 </html>

@@ -51,6 +51,15 @@
         border-radius: 4px;
         border: 1px solid #ccc;
       }
+      .history-btn {
+        background-color: #2196F3;
+        color: white;
+        padding: 10px 20px;
+        text-decoration: none;
+        border-radius: 4px;
+        display: inline-block;
+        margin-top: 20px;
+      }
     </style>
   </head>
   <body>
@@ -72,6 +81,8 @@
         <button type="submit" class="submit-btn">Upload Files</button>
       </form>
     </div>
+
+    <a href="{{ url_for('upload_history') }}" class="history-btn">View Upload History</a>
 
     <div class="dashboard-form">
       <form action="{{ url_for('show_dashboard') }}" method="GET">
