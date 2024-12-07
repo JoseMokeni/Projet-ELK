@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, flash, redirect, url_for, send_from_directory
+from flask import Flask, request, render_template, flash, redirect, url_for, send_from_directory, get_flashed_messages
 import os
 import re
 from werkzeug.utils import secure_filename
@@ -120,6 +120,9 @@ def download_file(log_type, filename):
 @app.route('/', methods=['GET', 'POST'])
 def upload_files():
     if request.method == 'POST':
+        # Clear previous messages by calling get_flashed_messages()
+        _ = get_flashed_messages()
+        
         # Check if any file was submitted
         if 'files[]' not in request.files:
             flash('No files selected')

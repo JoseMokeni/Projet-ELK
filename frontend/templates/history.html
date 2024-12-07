@@ -1,77 +1,80 @@
+{% extends "base.html" %}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Upload History</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        .history-container {
-            margin: 20px 0;
-        }
-        .file-list {
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            padding: 10px;
-        }
-        .file-item {
-            padding: 10px;
-            border-bottom: 1px solid #eee;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .file-item:last-child {
-            border-bottom: none;
-        }
-        .file-info {
-            flex-grow: 1;
-        }
-        .back-btn {
-            background-color: #4caf50;
-            color: white;
-            padding: 10px 20px;
-            text-decoration: none;
-            border-radius: 4px;
-            display: inline-block;
-            margin-bottom: 20px;
-        }
-        .download-btn {
-            background-color: #2196F3;
-            color: white;
-            padding: 5px 10px;
-            text-decoration: none;
-            border-radius: 4px;
-        }
-    </style>
-</head>
-<body>
-    <a href="{{ url_for('upload_files') }}" class="back-btn">Back to Upload</a>
-    <h1>Upload History</h1>
-    <div class="history-container">
+{% block title %}Upload History{% endblock %}
+
+{% block extra_css %}
+<style>
+    .history-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 1.5rem;
+    }
+
+    .file-list {
+        margin-top: 1rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;  /* Consistent spacing between items */
+    }
+
+    .file-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem 1.25rem;  /* Increased horizontal padding */
+        border: 1px solid var(--border-color);
+        border-radius: 0.375rem;
+        margin-bottom: 0.5rem;
+        background-color: white;
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .file-item:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+
+    .file-info {
+        flex-grow: 1;
+        margin-right: 1rem;  /* Space between text and button */
+    }
+
+    .file-name {
+        font-weight: 500;
+        color: var(--text-color);
+        margin-bottom: 0.375rem;  /* Reduced space between name and date */
+        word-break: break-all;  /* Prevent long filenames from overflowing */
+    }
+
+    .file-date {
+        font-size: 0.875rem;
+        color: #64748b;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+    <div class="history-grid">
         {% for log_type, files in files_by_type.items() %}
-            <h2>{{ log_type|title }} Logs</h2>
-            <div class="file-list">
-                {% if files %}
-                    {% for file in files %}
-                        <div class="file-item">
-                            <div class="file-info">
-                                <strong>{{ file.name }}</strong><br>
-                                Uploaded: {{ file.datetime }}
+            <div class="card">
+                <h2>{{ log_type|title }} Logs</h2>
+                <div class="file-list">
+                    {% if files %}
+                        {% for file in files %}
+                            <div class="file-item">
+                                <div class="file-info">
+                                    <div class="file-name">{{ file.name }}</div>
+                                    <div class="file-date">{{ file.datetime }}</div>
+                                </div>
+                                <a href="{{ url_for('download_file', log_type=log_type, filename=file.name) }}" 
+                                   class="btn btn-secondary">Download</a>
                             </div>
-                            <a href="{{ url_for('download_file', log_type=log_type, filename=file.name) }}" class="download-btn">Download</a>
-                        </div>
-                    {% endfor %}
-                {% else %}
-                    <p>No files uploaded yet.</p>
-                {% endif %}
+                        {% endfor %}
+                    {% else %}
+                        <p>No files uploaded yet.</p>
+                    {% endif %}
+                </div>
             </div>
         {% endfor %}
     </div>
-</body>
-</html>
+{% endblock %}
