@@ -65,7 +65,8 @@ services:
       - ./logs:/logs
     environment:
       - infra=docker
-
+    networks:
+      - elk
 networks:
   elk:
     driver: bridge
