@@ -3,73 +3,172 @@
 {% block title %}Search Logs{% endblock %}
 
 {% block content %}
-    <h2>Search Logs</h2>
-    <form method="POST">
-        <div>
-            <label for="query">Query:</label>
-            <input type="text" name="query" id="query" value="{{ query|default('') }}" required>
+    <div class="search-container">
+        <div class="search-card">
+            <h2>Search Logs</h2>
+            <form method="POST" class="search-form">
+                <div class="form-group">
+                    <label for="query">Search Query:</label>
+                    <input type="text" 
+                           name="query" 
+                           id="query" 
+                           value="{{ query|default('') }}" 
+                           required
+                           placeholder="Enter your search query...">
+                </div>
+                <div class="form-group">
+                    <label for="log_type">Log Type:</label>
+                    <select name="log_type" id="log_type" required>
+                        <option value="">Select log type...</option>
+                        <option value="mysql" {% if log_type == 'mysql' %}selected{% endif %}>MySQL Slow Queries</option>
+                        <option value="nginx" {% if log_type == 'nginx' %}selected{% endif %}>Nginx Access</option>
+                        <option value="system" {% if log_type == 'system' %}selected{% endif %}>System Metrics</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary search-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16" style="margin-right: 8px;">
+                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                    </svg>
+                    Search
+                </button>
+            </form>
         </div>
-        <div>
-            <label for="log_type">Log Type:</label>
-            <select name="log_type" id="log_type" required>
-                <option value="">Select log type...</option>
-                <option value="mysql" {% if log_type == 'mysql' %}selected{% endif %}>MySQL Slow Queries</option>
-                <option value="nginx" {% if log_type == 'nginx' %}selected{% endif %}>Nginx Access</option>
-                <option value="system" {% if log_type == 'system' %}selected{% endif %}>System Metrics</option>
-            </select>
-        </div>
-        <button type="submit" class="btn btn-primary">Search</button>
-    </form>
 
-    {% if records %}
-        <h3>Search Results</h3>
-        <div class="table-responsive">
-            <table class="table">
-                <thead>
-                    <tr>
-                        {% for field in fields %}
-                            <th>{{ field }}</th>
-                        {% endfor %}
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for record in records %}
-                        <tr>
-                            {% for field in fields %}
-                                <td>{{ record[field] }}</td>
+        {% if records %}
+            <div class="results-card">
+                <h3>Search Results ({{ records|length }})</h3>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                {% for field in fields %}
+                                    <th>{{ field|replace('_', ' ')|title }}</th>
+                                {% endfor %}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for record in records %}
+                                <tr>
+                                    {% for field in fields %}
+                                        <td>{{ record[field] }}</td>
+                                    {% endfor %}
+                                </tr>
                             {% endfor %}
-                        </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </div>
-    {% elif query is defined %}
-        <p>No results found.</p>
-    {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        {% elif query is defined %}
+            <div class="no-results">
+                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                    <path d="M4.285 12.433a.5.5 0 0 0 .683-.183A3.498 3.498 0 0 1 8 10.5c1.295 0 2.426.703 3.032 1.75a.5.5 0 0 0 .866-.5A4.498 4.498 0 0 0 8 9.5a4.5 4.5 0 0 0-3.898 2.25.5.5 0 0 0 .183.683zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zm4 0c0 .828-.448 1.5-1 1.5s-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5z"/>
+                </svg>
+                <p>No results found for your search.</p>
+            </div>
+        {% endif %}
+    </div>
 {% endblock %}
 
 {% block extra_css %}
 <style>
-    .table-responsive {
-        margin-top: 1rem;
-        overflow-x: auto;
+    .search-container {
+        max-width: 1000px;
+        margin: 0 auto;
     }
-    .table {
-        width: 100%;
-        border-collapse: collapse;
-        background-color: white;
+
+    .search-card {
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        padding: 2rem;
+        margin-bottom: 2rem;
     }
-    .table th, .table td {
+
+    .search-form {
+        display: grid;
+        grid-template-columns: 2fr 1fr auto;
+        gap: 1rem;
+        align-items: end;
+    }
+
+    .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .form-group label {
+        font-weight: 500;
+        color: var(--text-color);
+    }
+
+    .form-group input,
+    .form-group select {
         padding: 0.75rem;
         border: 1px solid var(--border-color);
-        text-align: left;
+        border-radius: 6px;
+        font-size: 1rem;
+        transition: border-color 0.2s;
     }
+
+    .form-group input:focus,
+    .form-group select:focus {
+        border-color: var(--primary-color);
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    }
+
+    .search-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 45px;
+    }
+
+    .results-card {
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        padding: 1.5rem;
+    }
+
+    .table {
+        margin-top: 1rem;
+    }
+
     .table th {
-        background-color: #f1f5f9;
+        background-color: #f8fafc;
+        padding: 1rem;
         font-weight: 600;
     }
-    .table tr:nth-child(even) {
-        background-color: #f9fafb;
+
+    .table td {
+        padding: 1rem;
+        vertical-align: top;
+    }
+
+    .no-results {
+        text-align: center;
+        padding: 3rem;
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        color: #64748b;
+    }
+
+    .no-results svg {
+        margin-bottom: 1rem;
+    }
+
+    .no-results p {
+        font-size: 1.1rem;
+    }
+
+    @media (max-width: 768px) {
+        .search-form {
+            grid-template-columns: 1fr;
+        }
     }
 </style>
 {% endblock %}
