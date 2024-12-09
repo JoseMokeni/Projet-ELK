@@ -1,0 +1,46 @@
+
+{% extends "base.html" %}
+
+{% block title %}Search Logs{% endblock %}
+
+{% block content %}
+    <h2>Search Logs</h2>
+    <form method="POST">
+        <div>
+            <label for="query">Query:</label>
+            <input type="text" name="query" id="query" value="{{ query|default('') }}" required>
+        </div>
+        <div>
+            <label for="log_type">Log Type:</label>
+            <select name="log_type" id="log_type" required>
+                <option value="">Select log type...</option>
+                <option value="mysql-slow" {% if log_type == 'mysql' %}selected{% endif %}>MySQL Slow Queries</option>
+                <option value="nginx-access" {% if log_type == 'nginx' %}selected{% endif %}>Nginx Access</option>
+                <option value="system-metrics" {% if log_type == 'system' %}selected{% endif %}>System Metrics</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Search</button>
+    </form>
+
+    {% if hits %}
+        <h3>Search Results</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Timestamp</th>
+                    <th>Data</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for hit in hits %}
+                    <tr>
+                        <td>{{ hit._source['@timestamp'] }}</td>
+                        <td>{{ hit._source }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% elif query is defined %}
+        <p>No results found.</p>
+    {% endif %}
+{% endblock %}

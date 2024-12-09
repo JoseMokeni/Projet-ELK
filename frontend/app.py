@@ -4,8 +4,13 @@ import re
 from werkzeug.utils import secure_filename
 from datetime import datetime
 from dotenv import load_dotenv  # Add this import
+from elasticsearch import Elasticsearch
+import logging
 
 load_dotenv()  # Load environment variables
+
+# Configure logging
+logging.basicConfig(level=logging.DEBUG, format='%(asctime)s [%(levelname)s] %(message)s')
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'this-is-my-secret-key'  # Message flashing
@@ -36,6 +41,12 @@ LOG_DIRS = {
 for directory in LOG_DIRS.values():
     os.makedirs(directory, exist_ok=True)
 
+# Initialize Elasticsearch client
+if infra == 'docker':
+    es = Elasticsearch(['http://elasticsearch:9200'])
+else:
+    es = Elasticsearch(['http://localhost:9200'])
+    
 def allowed_file(filename):
     """Check if the file extension is allowed"""
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
@@ -172,6 +183,41 @@ def upload_files():
         return redirect(url_for('upload_files'))
     
     return render_template('upload.html')
+
+@app.route('/search', methods=['GET', 'POST'])
+def search_logs():
+    if request.method == 'POST':
+        query_text = request.form.get('query')
+        log_type = request.form.get('log_type')
+        
+        logging.debug(f"Received search request: query='{query_text}', log_type='{log_type}'")
+
+        if not query_text or not log_type:
+            flash('Please enter a query and select a log type')
+            logging.warning('Search request missing query or log_type')
+            return redirect(url_for('search_logs'))
+
+        index_name = f"{log_type}-*"
+        search_body = {
+            "query": {
+                "query_string": {
+                    "query": query_text
+                }
+            }
+        }
+        logging.debug(f"Elasticsearch search body: {search_body}")
+        try:
+            res = es.search(index=index_name, body=search_body)
+            hits = res['hits']['hits']
+            logging.debug(f"Elasticsearch returned {len(hits)} hits")
+        except Exception as e:
+            logging.error(f"Error querying Elasticsearch: {e}")
+            flash('Error querying Elasticsearch')
+            hits = []
+
+        return render_template('search.html', hits=hits, query=query_text, log_type=log_type)
+    else:
+        return render_template('search.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
