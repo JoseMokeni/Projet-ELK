@@ -1,4 +1,3 @@
-
 {% extends "base.html" %}
 
 {% block title %}Search Logs{% endblock %}
@@ -14,33 +13,63 @@
             <label for="log_type">Log Type:</label>
             <select name="log_type" id="log_type" required>
                 <option value="">Select log type...</option>
-                <option value="mysql-slow" {% if log_type == 'mysql' %}selected{% endif %}>MySQL Slow Queries</option>
-                <option value="nginx-access" {% if log_type == 'nginx' %}selected{% endif %}>Nginx Access</option>
-                <option value="system-metrics" {% if log_type == 'system' %}selected{% endif %}>System Metrics</option>
+                <option value="mysql" {% if log_type == 'mysql' %}selected{% endif %}>MySQL Slow Queries</option>
+                <option value="nginx" {% if log_type == 'nginx' %}selected{% endif %}>Nginx Access</option>
+                <option value="system" {% if log_type == 'system' %}selected{% endif %}>System Metrics</option>
             </select>
         </div>
         <button type="submit" class="btn btn-primary">Search</button>
     </form>
 
-    {% if hits %}
+    {% if records %}
         <h3>Search Results</h3>
-        <table>
-            <thead>
-                <tr>
-                    <th>Timestamp</th>
-                    <th>Data</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for hit in hits %}
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
                     <tr>
-                        <td>{{ hit._source['@timestamp'] }}</td>
-                        <td>{{ hit._source }}</td>
+                        {% for field in fields %}
+                            <th>{{ field }}</th>
+                        {% endfor %}
                     </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    {% for record in records %}
+                        <tr>
+                            {% for field in fields %}
+                                <td>{{ record[field] }}</td>
+                            {% endfor %}
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
     {% elif query is defined %}
         <p>No results found.</p>
     {% endif %}
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    .table-responsive {
+        margin-top: 1rem;
+        overflow-x: auto;
+    }
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+        background-color: white;
+    }
+    .table th, .table td {
+        padding: 0.75rem;
+        border: 1px solid var(--border-color);
+        text-align: left;
+    }
+    .table th {
+        background-color: #f1f5f9;
+        font-weight: 600;
+    }
+    .table tr:nth-child(even) {
+        background-color: #f9fafb;
+    }
+</style>
 {% endblock %}

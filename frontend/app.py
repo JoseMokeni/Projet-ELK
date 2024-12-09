@@ -207,15 +207,34 @@ def search_logs():
         }
         logging.debug(f"Elasticsearch search body: {search_body}")
         try:
-            res = es.search(index=index_name, body=search_body)
+            res = es.search(index=index_name, body=search_body, size=50)
             hits = res['hits']['hits']
             logging.debug(f"Elasticsearch returned {len(hits)} hits")
+
+            # Define fields to display based on log type
+            if log_type == 'mysql':
+                fields = ['@timestamp', 'user', 'host', 'ip', 'query_time', 'lock_time', 'rows_sent', 'rows_examined', 'query']
+            elif log_type == 'nginx':
+                fields = ['@timestamp', 'remote_addr', 'request_method', 'request_uri', 'status', 'body_bytes_sent', 'request_time']
+            elif log_type == 'system':
+                fields = ['@timestamp', 'metric_name', 'metric_value']
+            else:
+                fields = []
+
+            # Extract records with the specified fields
+            records = []
+            for hit in hits:
+                source = hit['_source']
+                record = {field: source.get(field, '') for field in fields}
+                records.append(record)
+
         except Exception as e:
             logging.error(f"Error querying Elasticsearch: {e}")
             flash('Error querying Elasticsearch')
-            hits = []
+            records = []
+            fields = []
 
-        return render_template('search.html', hits=hits, query=query_text, log_type=log_type)
+        return render_template('search.html', records=records, fields=fields, query=query_text, log_type=log_type)
     else:
         return render_template('search.html')
 
