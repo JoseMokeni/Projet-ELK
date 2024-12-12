@@ -189,29 +189,41 @@ def search_logs():
     if request.method == 'POST':
         query_text = request.form.get('query')
         log_type = request.form.get('log_type')
-        
-        logging.debug(f"Received search request: query='{query_text}', log_type='{log_type}'")
+        page = 1  # Reset to first page on new search
+    else:
+        query_text = request.args.get('query')
+        log_type = request.args.get('log_type')
+        page = int(request.args.get('page', 1))
 
-        if not query_text or not log_type:
-            flash('Please enter a query and select a log type')
-            logging.warning('Search request missing query or log_type')
-            return redirect(url_for('search_logs'))
+    if query_text and log_type:
+        logging.debug(f"Received search request: query='{query_text}', log_type='{log_type}', page={page}")
 
         index_name = f"{log_type}-*"
+        per_page = 10  # Number of results per page
+        
         search_body = {
             "query": {
                 "query_string": {
                     "query": query_text
                 }
-            }
+            },
+            "from": (page - 1) * per_page,
+            "size": per_page,
+            "sort": [{"@timestamp": "desc"}]
         }
-        logging.debug(f"Elasticsearch search body: {search_body}")
-        try:
-            res = es.search(index=index_name, body=search_body, size=50)
-            hits = res['hits']['hits']
-            logging.debug(f"Elasticsearch returned {len(hits)} hits")
 
-            # Define fields to display based on log type
+        try:
+            # Get total count first
+            count_res = es.count(index=index_name, body={"query": search_body["query"]})
+            total_hits = count_res['count']
+            total_pages = (total_hits + per_page - 1) // per_page
+
+            # Then get paginated results
+            res = es.search(index=index_name, body=search_body)
+            hits = res['hits']['hits']
+            logging.debug(f"Elasticsearch returned {len(hits)} hits out of {total_hits} total")
+
+            # Define fields based on log type
             if log_type == 'mysql':
                 fields = ['@timestamp', 'user', 'host', 'ip', 'query_time', 'lock_time', 'rows_sent', 'rows_examined', 'query']
             elif log_type == 'nginx':
@@ -221,22 +233,38 @@ def search_logs():
             else:
                 fields = []
 
-            # Extract records with the specified fields
+            # Extract records
             records = []
             for hit in hits:
                 source = hit['_source']
                 record = {field: source.get(field, '') for field in fields}
                 records.append(record)
 
+            # Pagination info
+            pagination = {
+                'page': page,
+                'per_page': per_page,
+                'total_pages': total_pages,
+                'total_hits': total_hits,
+                'has_prev': page > 1,
+                'has_next': page < total_pages
+            }
+
         except Exception as e:
             logging.error(f"Error querying Elasticsearch: {e}")
             flash('Error querying Elasticsearch')
             records = []
             fields = []
+            pagination = None
 
-        return render_template('search.html', records=records, fields=fields, query=query_text, log_type=log_type)
-    else:
-        return render_template('search.html')
+        return render_template('search.html', 
+                             records=records, 
+                             fields=fields, 
+                             query=query_text, 
+                             log_type=log_type,
+                             pagination=pagination)
+
+    return render_template('search.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
